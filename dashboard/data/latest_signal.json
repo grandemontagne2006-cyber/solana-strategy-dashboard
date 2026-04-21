@@ -1,0 +1,118 @@
+{
+  "timestamp": "2026-04-16T08:00:09.410413",
+  "final_regime": "NEUTRAL",
+  "final_score": 52.697578804127346,
+  "confidence": 50.0,
+  "btc_price": 74560,
+  "sol_price": 85.05,
+  "token_recommendations": {
+    "xtokens": {
+      "xSOL": 6.65,
+      "xBTC": 2.85
+    },
+    "jlp": {
+      "JLP": 20.9,
+      "yields": {
+        "JLP": "25.0%"
+      }
+    },
+    "yield": {
+      "sHyUSD": 26.6,
+      "yields": {
+        "sHyUSD": "18.5%"
+      }
+    },
+    "cash": {
+      "jupUSD": 7.6,
+      "hyUSD": 30.4,
+      "yields": {
+        "jupUSD": "4.2%",
+        "hyUSD": "8.1%"
+      }
+    },
+    "gas": 5.0
+  },
+  "hedge": {
+    "active": false
+  },
+  "sentinel": {
+    "timestamp": "2026-04-15T12:22:04.889029",
+    "is_crisis": false,
+    "reason": "",
+    "tactical_score": 65.0,
+    "active_sentinels": [
+      "tier10k",
+      "tier10k",
+      "tier10k",
+      "lookonchain",
+      "lookonchain",
+      "lookonchain",
+      "DeItaone",
+      "DeItaone",
+      "DeItaone",
+      "NickTimiraos",
+      "NickTimiraos",
+      "NickTimiraos",
+      "unusual_whales",
+      "unusual_whales",
+      "unusual_whales"
+    ]
+  },
+  "layer_breakdown": {
+    "01-astro": {
+      "score": 53.0,
+      "regime": "NEUTRAL",
+      "reason": "\ud83d\udcc5 General Apr alignment",
+      "timestamp": "2026-04-16T08:00:08.420280"
+    },
+    "02-technical": {
+      "score": 67.4,
+      "regime": "NEUTRAL-BULLISH",
+      "reason": "BTC @ $74,233 | 4H BEARISH (Conf: 28.4%)",
+      "timestamp": "2026-04-15T08:00:04.501083"
+    },
+    "03-social": {
+      "score": 75.0,
+      "regime": "BULLISH",
+      "reason": "Manual analysis from 1 sources (fallback)",
+      "timestamp": "2026-04-15T10:02:48.308277"
+    },
+    "04-fear": {
+      "score": 14.0,
+      "regime": "BEARISH",
+      "reason": "Crypto Fear & Greed Index: 14 (Extreme Fear)",
+      "timestamp": "2026-04-08 20:00:00"
+    },
+    "05-whale": {
+      "score": 40.0,
+      "regime": "NEUTRAL-BEARISH",
+      "reason": "Reducing position (0 SOL avg)",
+      "timestamp": "2026-04-09T08:44:31.994425"
+    },
+    "06-macro": {
+      "score": 50.0,
+      "regime": "NEUTRAL",
+      "reason": "Scanning...",
+      "timestamp": "2026-04-16T08:00:02.410113"
+    }
+  },
+  "reasoning": "Autonomous swarm consensus active.",
+  "narrative": "Although social and whale sentiment are slightly bullish, the overall neutral score, weak macro context, and absence of technical direction suggest a pullback opportunity for risk reduction.",
+  "weighted_apy": "8.5%",
+  "tactical": {},
+  "agentic_audit": {
+    "verdict": "WEAKEN",
+    "reasoning": "Although social and whale sentiment are slightly bullish, the overall neutral score, weak macro context, and absence of technical direction suggest a pullback opportunity for risk reduction.",
+    "multiplier": 0.9,
+    "timestamp": "2026-04-15T10:12:25.276417",
+    "success": true
+  },
+  "debate_insights": [],
+  "debate_multiplier": 1.0,
+  "system_status": {
+    "status": "ACTIVE",
+    "system_version": "v4.3.7-Auto",
+    "node_health": "OPTIMAL",
+    "last_sync": "2026-04-16T08:00:09.410413"
+  }
+}
