@@ -1,0 +1,575 @@
+{
+  "timestamp": "2026-04-22T12:03:06.736513",
+  "meta": {
+    "version": "v6.0 vTOTAL",
+    "system": "GLOBAL_DRAGON_SWARM",
+    "status": "LIVE_MAINNET_ACTIVE"
+  },
+  "dragon_vitals": {
+    "score": 48.94,
+    "regime": "BEAR_NEUTRAL",
+    "conviction": 0.9,
+    "war_shock": false,
+    "gate_cgs": 65.6,
+    "deployment_mode": "ACTIVE",
+    "tactical_pct": 0.7,
+    "pnl_master_veto": false,
+    "executor": "D8yP...H1b",
+    "hedge": "6uNW...atoT",
+    "equity_multiple": "1.0x"
+  },
+  "swarm_matrix": {
+    "astro": {
+      "score": 51.8,
+      "reasoning": "General Apr alignment | No planetary data available"
+    },
+    "macro": {
+      "score": 55.0,
+      "reasoning": "De-dollarization bid detected in XAU/XTI"
+    },
+    "technical": {
+      "score": 55.5,
+      "reasoning": "Trend: NEUTRAL-BULLISH"
+    },
+    "fear_greed": {
+      "score": 32.8,
+      "reasoning": "Composite Temperature: Fearful"
+    },
+    "whale": {
+      "score": 50.0,
+      "reasoning": "On-chain signals neutral"
+    },
+    "social": {
+      "score": 65.0,
+      "reasoning": "Elite social swarm sentiment"
+    },
+    "liquidity": {
+      "score": 52.4,
+      "reasoning": "Institutional capacity stable (Orca/Raydium)"
+    },
+    "intermarket": {
+      "score": 58.2,
+      "reasoning": "OIL/GOLD divergence detected (War-Shock Override active)"
+    }
+  },
+  "health_telemetry": {
+    "keychain": "HARDWARE_SECURED",
+    "rpc_latency": "42ms",
+    "node_heartbeat": "ONLINE",
+    "sentinel": "ACTIVE",
+    "helius_bridge": "SUCCESS"
+  },
+  "market_prices": {
+    "XAU": 4726.487,
+    "OIL": 92.19963000000001,
+    "EUR": 1.1712900000000002,
+    "BTC": 79339.18027608,
+    "SOL": 88.27675643,
+    "GOLD": 4726.487
+  },
+  "gate_status": {
+    "liquidity": true,
+    "inflation": true,
+    "risk": true
+  },
+  "gate_scores": {
+    "G1": 66.1,
+    "G2": 68.1,
+    "G3": 62.7,
+    "CGS": 65.6
+  },
+  "deployment": {
+    "mode": "ACTIVE",
+    "tactical_pct": 0.7,
+    "floor_pct": 0.5
+  },
+  "intermarket_data": {
+    "correlation_matrix": {
+      "DXY_BTC": -0.85,
+      "GLD_SPX": -0.45,
+      "OIL_GLD": 0.35,
+      "SOL_BTC": 0.88,
+      "OIL_SPX": -0.25,
+      "EUR_DXY": -0.98
+    },
+    "layer8_score": 50.0
+  },
+  "fortress_armor": {
+    "actual_yield_floor": "79%",
+    "target_yield_floor": "67%",
+    "actual_allocations": {
+      "sFLP.1": 49.91776927601835,
+      "sFLP.2": 29.43586740360711,
+      "USDC_CASH": 1.9618679954416893
+    },
+    "target_allocations": {
+      "sFLP.1": 42.0,
+      "sFLP.2": 25.0
+    }
+  },
+  "tactical_weapons": {
+    "positions": [
+      {
+        "symbol": "SOL",
+        "weight": 18.7,
+        "side": "ARMOR",
+        "leverage": 1.0,
+        "status": "SECURED"
+      },
+      {
+        "symbol": "sFLP.1",
+        "weight": 49.9,
+        "side": "ARMOR",
+        "leverage": 1.0,
+        "status": "SECURED"
+      },
+      {
+        "symbol": "sFLP.2",
+        "weight": 29.4,
+        "side": "ARMOR",
+        "leverage": 1.0,
+        "status": "SECURED"
+      }
+    ]
+  },
+  "master_key_vault": {
+    "vault_address": "D8yP...H1b"
+  },
+  "narrative": "The macro thesis remains intact: structural bid on GOLD and RWA dominance (sFLP.1/sFLP.2) despite fading energy premiums. The Sovereign Gate Engine (CGS: 65.6) places us firmly in the 'ACTIVE' deployment tier (70% tactical authorization), which aligns well with the current Bear-Neutral 'Defensive Wall' regime established by historical context (Labyrinth) and the high yield floor requirement (65%). We maintain a defensive posture, prioritizing capital preservation through yield farming (sFLP.1/sFLP.2) and hedging systemic risks (GOLD, SPX_short). Given the stable PnL (0.0% PnL) and the macro conviction (0.9) across the historical setups, the Bear-Neutral regime is the optimal blend of defensive strength and selective tactical participation. No War-Shock detected. We will slightly adjust allocations to overweight the core defense and the most resilient hard asset, GOLD, while maximizing the yield engine component.",
+  "evolution": "The macro thesis remains intact: structural bid on GOLD and RWA dominance (sFLP.1/sFLP.2) despite fading energy premiums. The Sovereign Gate Engine (CGS: 65.6) places us firmly in the 'ACTIVE' deployment tier (70% tactical authorization), which aligns well with the current Bear-Neutral 'Defensive Wall' regime established by historical context (Labyrinth) and the high yield floor requirement (65%). We maintain a defensive posture, prioritizing capital preservation through yield farming (sFLP.1/sFLP.2) and hedging systemic risks (GOLD, SPX_short). Given the stable PnL (0.0% PnL) and the macro conviction (0.9) across the historical setups, the Bear-Neutral regime is the optimal blend of defensive strength and selective tactical participation. No War-Shock detected. We will slightly adjust allocations to overweight the core defense and the most resilient hard asset, GOLD, while maximizing the yield engine component.",
+  "pivot": "REGIME: BEAR_NEUTRAL",
+  "portfolio": {
+    "timestamp": "2026-04-22T12:03:02.383209",
+    "net_asset_value": 254.86,
+    "portfolio": {
+      "net_asset_value": 254.86,
+      "pct_pnl": 0.0
+    },
+    "fortress_armor": {
+      "allocations": {
+        "SOL": 18.68483078858665,
+        "sFLP.1": 49.91776927601835,
+        "sFLP.2": 29.43586740360711,
+        "EPjFWdd5": 1.9618679954416893
+      }
+    },
+    "tactical_weapons": {
+      "positions": []
+    },
+    "dragon_vitals": {
+      "regime": "BEAR_NEUTRAL",
+      "score": 50.0,
+      "war_shock": false
+    },
+    "narrative": "",
+    "abs_pnl": 39.53,
+    "pct_pnl": 18.35786931686249,
+    "history": [
+      {
+        "timestamp": "2026-04-17T14:48:29.084304",
+        "nav": 200.63
+      },
+      {
+        "timestamp": "2026-04-17T14:50:53.780528",
+        "nav": 200.61
+      },
+      {
+        "timestamp": "2026-04-17T14:53:18.863723",
+        "nav": 200.68
+      },
+      {
+        "timestamp": "2026-04-17T17:01:20.541297",
+        "nav": 200.63
+      },
+      {
+        "timestamp": "2026-04-17T17:04:41.755460",
+        "nav": 200.72
+      },
+      {
+        "timestamp": "2026-04-17T18:02:25.825330",
+        "nav": 200.34
+      },
+      {
+        "timestamp": "2026-04-17T20:02:33.108000",
+        "nav": 200.15
+      },
+      {
+        "timestamp": "2026-04-17T22:02:32.518685",
+        "nav": 200.03
+      },
+      {
+        "timestamp": "2026-04-17T23:35:54.532762",
+        "nav": 199.84
+      },
+      {
+        "timestamp": "2026-04-17T23:36:51.656369",
+        "nav": 199.84
+      },
+      {
+        "timestamp": "2026-04-17T23:37:50.261026",
+        "nav": 199.83
+      },
+      {
+        "timestamp": "2026-04-17T23:38:46.918049",
+        "nav": 199.85
+      },
+      {
+        "timestamp": "2026-04-17T23:39:45.410710",
+        "nav": 199.82
+      },
+      {
+        "timestamp": "2026-04-17T23:40:40.393334",
+        "nav": 199.83
+      },
+      {
+        "timestamp": "2026-04-17T23:41:35.448557",
+        "nav": 199.85
+      },
+      {
+        "timestamp": "2026-04-17T23:42:37.755142",
+        "nav": 199.86
+      },
+      {
+        "timestamp": "2026-04-18T00:00:56.917377",
+        "nav": 199.86
+      },
+      {
+        "timestamp": "2026-04-18T01:14:30.063543",
+        "nav": 200.0
+      },
+      {
+        "timestamp": "2026-04-18T01:25:45.055246",
+        "nav": 200.05
+      },
+      {
+        "timestamp": "2026-04-18T02:00:53.717187",
+        "nav": 199.88
+      },
+      {
+        "timestamp": "2026-04-18T04:00:56.940701",
+        "nav": 199.61
+      },
+      {
+        "timestamp": "2026-04-18T06:00:54.786718",
+        "nav": 199.65
+      },
+      {
+        "timestamp": "2026-04-18T08:00:57.005007",
+        "nav": 199.65
+      },
+      {
+        "timestamp": "2026-04-18T10:00:53.795633",
+        "nav": 199.19
+      },
+      {
+        "timestamp": "2026-04-18T12:00:57.299003",
+        "nav": 198.66
+      },
+      {
+        "timestamp": "2026-04-18T12:46:47.735574",
+        "nav": 198.75
+      },
+      {
+        "timestamp": "2026-04-18T13:41:06.445771",
+        "nav": 198.56
+      },
+      {
+        "timestamp": "2026-04-18T13:48:54.043980",
+        "nav": 198.66
+      },
+      {
+        "timestamp": "2026-04-18T14:01:01.298615",
+        "nav": 198.76
+      },
+      {
+        "timestamp": "2026-04-18T14:02:40.030649",
+        "nav": 198.75
+      },
+      {
+        "timestamp": "2026-04-18T14:08:29.962173",
+        "nav": 198.68
+      },
+      {
+        "timestamp": "2026-04-18T16:00:55.915631",
+        "nav": 198.66
+      },
+      {
+        "timestamp": "2026-04-18T18:01:04.567966",
+        "nav": 198.7
+      },
+      {
+        "timestamp": "2026-04-20T11:41:25.394453",
+        "nav": 197.87
+      },
+      {
+        "timestamp": "2026-04-20T11:50:42.883982",
+        "nav": 197.82
+      },
+      {
+        "timestamp": "2026-04-20T12:00:47.500073",
+        "nav": 197.76
+      },
+      {
+        "timestamp": "2026-04-20T12:02:49.040313",
+        "nav": 197.76
+      },
+      {
+        "timestamp": "2026-04-20T13:36:53.754572",
+        "nav": 197.99
+      },
+      {
+        "timestamp": "2026-04-20T14:02:57.282380",
+        "nav": 197.84
+      },
+      {
+        "timestamp": "2026-04-20T16:03:10.167667",
+        "nav": 198.12
+      },
+      {
+        "timestamp": "2026-04-20T18:03:05.254069",
+        "nav": 198.31
+      },
+      {
+        "timestamp": "2026-04-20T20:03:09.709099",
+        "nav": 198.24
+      },
+      {
+        "timestamp": "2026-04-20T22:02:30.999083",
+        "nav": 198.27
+      },
+      {
+        "timestamp": "2026-04-20T22:23:31.657179",
+        "nav": 198.16
+      },
+      {
+        "timestamp": "2026-04-20T22:27:20.604471",
+        "nav": 198.17
+      },
+      {
+        "timestamp": "2026-04-20T22:49:48.415724",
+        "nav": 198.12
+      },
+      {
+        "timestamp": "2026-04-20T22:52:26.907201",
+        "nav": 198.11
+      },
+      {
+        "timestamp": "2026-04-20T22:55:38.240827",
+        "nav": 198.13
+      },
+      {
+        "timestamp": "2026-04-20T22:56:00.805347",
+        "nav": 198.12
+      },
+      {
+        "timestamp": "2026-04-20T22:59:39.311055",
+        "nav": 198.15
+      },
+      {
+        "timestamp": "2026-04-20T23:00:13.115140",
+        "nav": 198.06
+      },
+      {
+        "timestamp": "2026-04-20T23:11:51.900359",
+        "nav": 197.99
+      },
+      {
+        "timestamp": "2026-04-21T00:02:17.969522",
+        "nav": 197.97
+      },
+      {
+        "timestamp": "2026-04-21T02:02:55.129158",
+        "nav": 197.91
+      },
+      {
+        "timestamp": "2026-04-21T04:02:44.769963",
+        "nav": 197.88
+      },
+      {
+        "timestamp": "2026-04-21T06:03:04.375355",
+        "nav": 198.1
+      },
+      {
+        "timestamp": "2026-04-21T08:02:45.651382",
+        "nav": 198.18
+      },
+      {
+        "timestamp": "2026-04-21T10:02:38.621568",
+        "nav": 198.27
+      },
+      {
+        "timestamp": "2026-04-21T12:02:15.035574",
+        "nav": 198.31
+      },
+      {
+        "timestamp": "2026-04-21T12:17:19.428737",
+        "nav": 198.19
+      },
+      {
+        "timestamp": "2026-04-21T12:24:07.521244",
+        "nav": 198.21
+      },
+      {
+        "timestamp": "2026-04-21T12:27:23.584731",
+        "nav": 198.2
+      },
+      {
+        "timestamp": "2026-04-21T12:32:07.070494",
+        "nav": 198.17
+      },
+      {
+        "timestamp": "2026-04-21T12:35:16.035842",
+        "nav": 198.25
+      },
+      {
+        "timestamp": "2026-04-21T12:37:56.380288",
+        "nav": 198.19
+      },
+      {
+        "timestamp": "2026-04-21T12:40:24.997625",
+        "nav": 198.0
+      },
+      {
+        "timestamp": "2026-04-21T12:43:54.921327",
+        "nav": 197.93
+      },
+      {
+        "timestamp": "2026-04-21T12:47:16.833011",
+        "nav": 197.94
+      },
+      {
+        "timestamp": "2026-04-21T12:50:18.372443",
+        "nav": 197.93
+      },
+      {
+        "timestamp": "2026-04-21T12:53:27.664515",
+        "nav": 197.98
+      },
+      {
+        "timestamp": "2026-04-21T12:56:57.216141",
+        "nav": 198.02
+      },
+      {
+        "timestamp": "2026-04-21T13:15:14.789755",
+        "nav": 197.99
+      },
+      {
+        "timestamp": "2026-04-21T13:17:51.159025",
+        "nav": 198.01
+      },
+      {
+        "timestamp": "2026-04-21T13:20:46.328742",
+        "nav": 198.02
+      },
+      {
+        "timestamp": "2026-04-21T13:29:30.089182",
+        "nav": 198.03
+      },
+      {
+        "timestamp": "2026-04-21T13:31:47.903624",
+        "nav": 197.98
+      },
+      {
+        "timestamp": "2026-04-21T13:34:51.082531",
+        "nav": 198.04
+      },
+      {
+        "timestamp": "2026-04-21T13:38:14.137507",
+        "nav": 197.99
+      },
+      {
+        "timestamp": "2026-04-21T13:41:02.857987",
+        "nav": 198.02
+      },
+      {
+        "timestamp": "2026-04-21T13:44:21.108543",
+        "nav": 198.17
+      },
+      {
+        "timestamp": "2026-04-21T13:48:10.537875",
+        "nav": 198.17
+      },
+      {
+        "timestamp": "2026-04-21T13:53:43.326410",
+        "nav": 198.21
+      },
+      {
+        "timestamp": "2026-04-21T13:56:54.389670",
+        "nav": 198.2
+      },
+      {
+        "timestamp": "2026-04-21T13:59:41.441086",
+        "nav": 198.19
+      },
+      {
+        "timestamp": "2026-04-21T14:02:24.333091",
+        "nav": 198.14
+      },
+      {
+        "timestamp": "2026-04-21T14:11:21.521696",
+        "nav": 198.15
+      },
+      {
+        "timestamp": "2026-04-21T14:15:02.614268",
+        "nav": 198.15
+      },
+      {
+        "timestamp": "2026-04-21T14:20:06.844975",
+        "nav": 198.26
+      },
+      {
+        "timestamp": "2026-04-21T16:02:49.943730",
+        "nav": 198.39
+      },
+      {
+        "timestamp": "2026-04-21T16:28:15.681615",
+        "nav": 198.32
+      },
+      {
+        "timestamp": "2026-04-21T18:03:03.428104",
+        "nav": 197.95
+      },
+      {
+        "timestamp": "2026-04-21T20:03:00.118408",
+        "nav": 197.55
+      },
+      {
+        "timestamp": "2026-04-21T22:03:05.906735",
+        "nav": 192.52
+      },
+      {
+        "timestamp": "2026-04-22T00:02:37.325086",
+        "nav": 192.98
+      },
+      {
+        "timestamp": "2026-04-22T02:02:58.186055",
+        "nav": 193.11
+      },
+      {
+        "timestamp": "2026-04-22T04:02:28.427329",
+        "nav": 193.67
+      },
+      {
+        "timestamp": "2026-04-22T06:02:53.311247",
+        "nav": 194.06
+      },
+      {
+        "timestamp": "2026-04-22T08:02:37.282754",
+        "nav": 194.14
+      },
+      {
+        "timestamp": "2026-04-22T10:02:40.517130",
+        "nav": 194.21
+      },
+      {
+        "timestamp": "2026-04-22T12:02:34.483142",
+        "nav": 59.03
+      }
+    ]
+  },
+  "pnl": {
+    "daily_pct": "18.36%",
+    "total_value": 254.86,
+    "abs_pnl": "$39.53"
+  }
+}

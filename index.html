@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[ DRAGON_TERMINAL_V6.0 ]</title>
+    <title>[ DRAGON_TERMINAL_V8.0 ]</title>
     <!-- Import JetBrains Mono for the absolute terminal feel -->
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
@@ -105,7 +105,14 @@
             text-shadow: 0 0 20px var(--border-glow);
             margin: 2px 0;
         }
-        .regime-label { color: var(--term-green); font-size: 1rem; letter-spacing: 4px; }
+        .regime-label { color: var(--term-green); font-size: 1rem; letter-spacing: 4px; transition: all 0.5s; }
+        .regime-1 { color: #00ffaa; text-shadow: 0 0 10px rgba(0, 255, 170, 0.5); }
+        .regime-1-5 { color: #00ff00; text-shadow: 0 0 15px rgba(0, 255, 0, 0.8); animation: pulse-green 1s infinite alternate; }
+        .regime-2 { color: var(--term-blue); text-shadow: none; }
+        .regime-2-5 { color: #ffcc00; text-shadow: 0 0 12px rgba(255, 204, 0, 0.6); }
+        .regime-3 { color: #ff3c3c; text-shadow: 0 0 20px rgba(255, 60, 60, 0.8); animation: flash-red 0.5s infinite alternate; }
+
+        @keyframes pulse-green { from { opacity: 0.7; } to { opacity: 1; } }
 
         /* Row Formatting */
         .terminal-row {
@@ -260,12 +267,35 @@
             border-top: 1px solid rgba(0, 251, 255, 0.3);
             padding-top: 8px;
         }
+
+        /* ⚡ v10.2 Overclock UI */
+        .overclock-btn {
+            background: rgba(255, 60, 60, 0.1);
+            border: 1px solid #ff3c3c;
+            color: #ff3c3c;
+            padding: 8px 15px;
+            font-family: inherit;
+            font-size: 0.6rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            width: 100%;
+            display: block;
+        }
+        .overclock-btn:hover { background: rgba(255, 60, 60, 0.2); box-shadow: 0 0 10px rgba(255, 60, 60, 0.3); }
+        .overclock-btn.active { background: #ff3c3c; color: #000; animation: flash-red 1s infinite alternate; }
+        @keyframes flash-red { from { opacity: 0.8; } to { opacity: 1; box-shadow: 0 0 15px rgba(255, 60, 60, 0.5); } }
+        .glow-red { text-shadow: 0 0 10px rgba(255, 60, 60, 0.8); color: var(--term-red) !important; }
     </style>
 </head>
 <body>
     <header class="terminal-header">
         <div style="display: flex; align-items: center; gap: 20px;">
-            <div>[ DRAGON_SYSTEM_V6.0_vTOTAL ]</div>
+            <div>[ DRAGON_SYSTEM_V10.2_OVERCLOCK ]</div>
             <div class="gate-container">
                 <div class="gate-unit">
                     <div style="position: relative; display: flex; align-items: center; justify-content: center;">
@@ -287,6 +317,13 @@
                         <span class="gate-val" id="valG3">0</span>
                     </div>
                     <span class="gate-label">RISK</span>
+                </div>
+                <div class="gate-unit">
+                    <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+                        <svg class="gate-ring-svg"><circle class="gate-ring-bg" cx="18" cy="18" r="16"></circle><circle class="gate-ring-fill" id="ringG4" cx="18" cy="18" r="16"></circle></svg>
+                        <span class="gate-val" id="valG4">0</span>
+                    </div>
+                    <span class="gate-label">ALPHA</span>
                 </div>
             </div>
             <div class="cgs-box">
@@ -319,7 +356,10 @@
                     <div id="pnlSparkline" style="width: 100%; height: 30px; margin: 10px 0; border-top: 1px solid rgba(0, 251, 255, 0.05); border-bottom: 1px solid rgba(0, 251, 255, 0.05);">
                         <!-- SVG Sparkline -->
                     </div>
-                    <div style="font-size: 0.7rem">CONVICTION_DELTA: <span class="highlight" id="dragonConviction">0%</span></div>
+                    <div style="font-size: 0.7rem; display: flex; justify-content: space-between;">
+                        <span>CONVICTION: <span class="highlight" id="dragonConviction">0%</span></span>
+                        <span>HVI: <span class="highlight" id="dragonHVI">0</span></span>
+                    </div>
                     <div style="font-size: 0.7rem; margin-top: 4px;">TACTICAL_ALLOC: <span class="highlight" id="tacticalDeploy">0%</span></div>
                 </div>
             </div>
@@ -339,21 +379,38 @@
 
         <!-- TIER 2: TACTICAL & RADAR (MID) -->
         <div class="row row-mid" style="flex: 0 0 auto; min-height: 250px;">
-            <div class="module" style="flex: 2; overflow-y: auto;">
+            <div class="module" style="flex: 1.5; overflow-y: auto;">
                 <div class="module-title">[ STRATEGIC_TARGET_BATTLE_PLAN (PROPOSED) ]</div>
-                <div id="posGrid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 5px;">
+                <div id="posGrid" style="display: grid; grid-template-columns: repeat(1, 1fr); gap: 10px; padding: 5px;">
                     <!-- Dynamic -->
                 </div>
                 <div style="font-size: 0.55rem; color: #888; margin-top: auto; text-align: center; opacity: 0.5; padding-top: 10px;">
-                    NOTE: THESE ARE SWARM-INTELLIGENCE TARGETS. THE ACTUAL DEPLOYMENT IS SUBJECT TO THE 3-GATE KERNEL.
+                    NOTE: TARGETS SUBJECT TO 4-GATE KERNEL.
                 </div>
             </div>
+
+            <div class="module" style="flex: 1; overflow-y: auto; border-color: var(--term-green);">
+                <div class="module-title" style="color: var(--term-green);">[ 🧿 360° PANOPTICON MONITOR ]</div>
+                <div style="text-align: center; padding: 15px 0;">
+                    <div style="font-size: 0.6rem; color: var(--term-dim); margin-bottom: 5px;">SURGE_VELOCITY (RVOL)</div>
+                    <div id="panRVol" style="font-size: 2.5rem; font-weight: 800; color: var(--term-highlight);">1.0x</div>
+                    <div id="panRegime" style="font-size: 0.7rem; color: var(--term-green); margin-top: 5px; letter-spacing: 2px;">SEARCHING...</div>
+                </div>
+                <div id="panRadar" style="flex: 1; display: flex; align-items: center; justify-content: center; opacity: 0.3;">
+                    <div style="width: 80px; height: 80px; border: 1px solid var(--term-green); border-radius: 50%; position: relative; animation: pulse-green 2s infinite;">
+                        <div style="position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: rgba(0, 255, 157, 0.2);"></div>
+                        <div style="position: absolute; left: 50%; top: 0; width: 1px; height: 100%; background: rgba(0, 255, 157, 0.2);"></div>
+                    </div>
+                </div>
+                <button id="overclock-btn" class="overclock-btn" onclick="toggleManualOverclock()">IGNITE OVERCLOCK</button>
+                <div style="font-size: 0.5rem; color: var(--term-dim); margin-top: auto; text-align: center; padding-top: 5px;">ZERO-COST AGGREGATOR PROXY ACTIVE</div>
+            </div>
             
-            <div class="module" style="flex: 1; overflow-y: auto;">
+            <div class="module" style="flex: 1.2; overflow-y: auto;">
                 <div class="module-title">[ LIVE_ON_CHAIN_AUDIT_REALITY ]</div>
                 <div id="livePositions" style="padding: 5px; font-size: 0.7rem;">
                     <!-- Audited Reality -->
-                    <div id="noPositions">NO LIVE POSITIONS DETECTED 在链上</div>
+                    <div id="noPositions">NO LIVE POSITIONS DETECTED</div>
                 </div>
             </div>
         </div>
@@ -403,8 +460,8 @@
         <div>LAST_DISPATCH_UTC: <span class="highlight" id="lastUpdate">--</span></div>
     </footer>
 
-    <!-- DATA BRIDGE (Mapped to dashboard/ subdirectory) -->
-    <script src="dashboard/data/latest_signal_v6.js"></script>
-    <script src="dashboard/js/dragon_engine.js"></script>
+    <!-- DATA BRIDGE -->
+    <script src="data/latest_signal_v10.js"></script>
+    <script src="js/dragon_engine.js"></script>
 </body>
 </html>
