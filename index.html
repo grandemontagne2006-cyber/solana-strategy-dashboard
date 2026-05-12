@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[ HERMES_V3_CONSOLIDATED ]</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050508;
+            --panel: rgba(15, 15, 25, 0.95);
+            --border: rgba(0, 251, 255, 0.2);
+            --cyan: #00fbff;
+            --green: #00ff9d;
+            --soft-green: #44aa88;
+            --amber: #ffcc00;
+            --red: #ff3c3c;
+            --dim: #9999aa;
+        }
+
+        * { box-sizing: border-box; cursor: crosshair; }
+        
+        /* HIGH-FIDELITY SCROLLBAR DOCTRINE */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+        ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 10px; box-shadow: 0 0 10px var(--cyan); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--green); }
+
+        body {
+            background: var(--bg);
+            color: #ccc;
+            font-family: 'JetBrains Mono', monospace;
+            margin: 0; padding: 15px;
+            height: 100vh; overflow: hidden;
+            display: grid;
+            grid-template-areas: 
+                "head head head"
+                "left center right"
+                "foot foot foot";
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 70px 1fr 60px;
+            gap: 15px;
+        }
+
+        body::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+            background-size: 100% 3px; z-index: 1000; pointer-events: none;
+        }
+
+        .module {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            position: relative;
+            display: flex; flex-direction: column;
+            padding: 12px;
+            backdrop-filter: blur(10px);
+            overflow-y: auto;
+        }
+        .module::after {
+            content: ""; position: absolute; top: -1px; left: -1px; width: 12px; height: 12px;
+            border-top: 3px solid var(--cyan); border-left: 3px solid var(--cyan);
+        }
+        
+        /* THE GLOBAL GOLD STANDARD TITLE */
+        .title {
+            font-size: 0.85rem; color: var(--cyan); letter-spacing: 2px;
+            margin-bottom: 10px; font-weight: 800; border-bottom: 1px solid var(--border);
+            padding-bottom: 6px; display: flex; justify-content: space-between;
+        }
+
+        header { 
+            grid-area: head; display: flex; justify-content: space-between; align-items: center;
+            border: 1px solid var(--cyan); padding: 0 25px; background: rgba(0, 251, 255, 0.05);
+        }
+
+        /* DUAL-LINE DOCTRINE STYLES */
+        .item-row { 
+            padding: 8px; border: 1px solid rgba(255,255,255,0.03); 
+            background: rgba(255,255,255,0.01); margin-bottom: 6px; 
+        }
+        .item-label { 
+            font-size: 0.82rem; font-weight: 800; display: flex; justify-content: space-between; 
+            color: #eee;
+        }
+        .item-sub { 
+            font-size: 0.7rem; color: var(--dim); margin-top: 2px; line-height: 1.2; 
+            letter-spacing: 1px; font-weight: 400; text-transform: uppercase;
+        }
+
+        .gate-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 10px; }
+        
+        .regime-gear {
+            display: flex; align-items: center; justify-content: center; gap: 20px;
+            border: 1px solid var(--border); background: rgba(0, 0, 0, 0.3); padding: 12px;
+        }
+        .gear-val { font-size: 1.6rem; font-weight: 800; line-height: 1; text-align: center; }
+        
+        .regime-map { margin-top: 10px; font-size: 0.85rem; border-top: 1px solid var(--border); padding-top: 10px; }
+        .map-row { display: flex; gap: 10px; margin-bottom: 6px; opacity: 0.6; padding: 4px 8px; }
+        .active-map { opacity: 1; background: rgba(0, 251, 255, 0.1); border-left: 4px solid var(--cyan); }
+
+        .center-panel { grid-area: center; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
+        .inventory-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-bottom: 5px; }
+        
+        .pnl-graph-box { height: 70px; border: 1px solid rgba(0, 251, 255, 0.1); position: relative; background: rgba(0,0,0,0.5); }
+        
+        .bay-section { margin-bottom: 5px; }
+        .performance-matrix { display: flex; gap: 8px; margin-top: auto; border-top: 1px solid var(--border); padding-top: 10px; }
+        .pnl-box { text-align: center; border: 1px solid rgba(255,255,255,0.05); padding: 8px; flex: 1; }
+
+        .swarm-grid { display: grid; grid-template-columns: 1fr; gap: 8px; overflow-y: auto; }
+        .narrative-terminal { flex: 1; font-size: 0.85rem; color: #aaa; overflow-y: auto; border-left: 1px solid var(--border); padding-left: 15px; line-height: 1.5; white-space: pre-wrap; }
+
+        footer { 
+            grid-area: foot; display: flex; justify-content: space-between; align-items: center;
+            border: 1px solid var(--cyan); padding: 0 25px; background: rgba(0, 251, 255, 0.05);
+            font-size: 0.85rem;
+        }
+
+        /* ATMOSPHERIC CUES DOCTRINE — v3.1 Full 6-Regime Spectrum */
+        .mode-big-bull { color: var(--green) !important; text-shadow: 0 0 30px var(--green); animation: pulse 1s infinite; } /* BIG_BULL — Asymmetric Crypto Decoupling */
+        .mode-bull { color: var(--green) !important; text-shadow: 0 0 20px var(--green); } /* BULL — Global Acceleration */
+        .mode-bull-neutral { color: var(--soft-green) !important; text-shadow: 0 0 10px var(--soft-green); } /* BULL_NEUTRAL — Consolidation / Yield-Pumping */
+        .mode-bear-neutral { color: var(--cyan) !important; text-shadow: 0 0 10px var(--cyan); } /* BEAR_NEUTRAL — Defensive Wall */
+        .mode-bear { color: var(--amber) !important; text-shadow: 0 0 15px var(--amber); } /* BEAR — Solar-Astro Fortress */
+        .mode-big-bear { color: var(--red) !important; text-shadow: 0 0 25px var(--red); animation: pulse 1.5s infinite; } /* BIG_BEAR — Liquidity Drain */
+
+        @keyframes gatePulse { 
+            0% { opacity: 1; filter: drop-shadow(0 0 2px currentColor); } 
+            50% { opacity: 0.4; filter: drop-shadow(0 0 8px currentColor); } 
+            100% { opacity: 1; filter: drop-shadow(0 0 2px currentColor); }
+        }
+        .pulse-active { animation: gatePulse 2s infinite ease-in-out; }
+        .pulse-caution { animation: gatePulse 1s infinite ease-in-out; }
+
+        .ignition-stamp {
+            font-size: 0.65rem; color: var(--dim); letter-spacing: 1px; font-weight: 400; 
+            text-transform: uppercase; margin-left: auto; margin-right: 15px;
+        }
+        /* dark-mode toggle — body.lit flips to lighter palette */
+        body.lit { --bg:#0d0d14; --panel:rgba(22,22,35,0.97); filter: brightness(1.12); }
+        .btn-toggle { font-size:0.7rem; color:var(--dim); border:1px solid var(--border);
+            padding:2px 8px; cursor:pointer; letter-spacing:1px; background:transparent;
+            font-family:inherit; }
+        .btn-toggle:hover { color:var(--cyan); border-color:var(--cyan); }
+        /* stale data banner */
+        .stale-banner { display:none; font-size:0.72rem; color:var(--amber);
+            letter-spacing:2px; animation: gatePulse 1.5s infinite; }
+        /* trend sparkbar */
+        .trend-bar { display:flex; gap:3px; align-items:flex-end; height:22px; margin-top:3px; }
+        .trend-bar span { width:9px; background:var(--cyan); opacity:0.7;
+            transition:height .3s; min-height:2px; }
+        /* regime timeline rows */
+        .rl-row { display:flex; gap:8px; font-size:0.7rem; color:var(--dim);
+            border-left:2px solid rgba(0,251,255,0.15); padding-left:6px; margin-bottom:3px; }
+        .rl-row.rl-cur { color:var(--cyan); border-left-color:var(--cyan); }
+        /* recovery status */
+        .rec-ok  { color:var(--green) !important; }
+        .rec-warn { color:var(--amber) !important; }
+        .rec-bad  { color:var(--red) !important; }
+    </style>
+</head>
+<body>
+    <header>
+        <div style="font-size: 1.1rem; font-weight: 800; color: var(--cyan);">[ HERMES_V3_CONSOLIDATED ]</div>
+        <span class="stale-banner" id="staleBanner">⚠ DATA_STALE</span>
+        <div style="display:flex;align-items:center;gap:15px;">
+            <button class="btn-toggle" id="modeBtn" onclick="toggleMode()">[LIT]</button>
+            <div style="font-size: 0.85rem; color: var(--dim);">SOVEREIGN_WALLET: <span id="walletAddr" style="color:var(--cyan);font-weight:800;">D8yP...H1b</span></div>
+        </div>
+    </header>
+
+    <div class="module left-panel">
+        <div class="title" style="display:flex; align-items:center;">
+            <span>KERNEL_STATUS</span>
+            <span class="ignition-stamp" id="lastIgnition">IGNITION_PENDING</span>
+            <span>CGS: <span id="dragonCGS">0.0</span></span>
+        </div>
+        <div class="title" style="margin-top:10px; border-bottom:1px solid rgba(255,255,255,0.05);">REGIME_MAP (6-REGIME SPECTRUM)</div>
+        <div class="regime-map" style="margin-top:4px;">
+            <div class="map-row" id="mapBigBull"><span style="width:70px; font-weight:800;">BIG_BULL</span> <span>Asymmetric Crypto Decoupling &mdash; R1.8</span></div>
+            <div class="map-row" id="mapBull"><span style="width:70px; font-weight:800;">BULL</span> <span>Global Acceleration &mdash; R1</span></div>
+            <div class="map-row" id="mapBullNeutral"><span style="width:70px; font-weight:800;">BULL_N</span> <span>Consolidation / Yield-Pumping &mdash; R1.5</span></div>
+            <div class="map-row" id="mapBearNeutral"><span style="width:70px; font-weight:800;">BEAR_N</span> <span>Defensive Wall &mdash; R2</span></div>
+            <div class="map-row" id="mapBear"><span style="width:70px; font-weight:800;">BEAR</span> <span>Solar-Astro Fortress &mdash; R2.5</span></div>
+            <div class="map-row" id="mapBigBear"><span style="width:70px; font-weight:800;">BIG_BEAR</span> <span>Liquidity Drain &mdash; R3</span></div>
+        </div>
+        <div style="margin-top:8px;">
+            <div class="title" style="font-size:0.72rem;">REGIME_LOG (LAST 12 CYCLES)</div>
+            <div id="regimeTimeline"></div>
+        </div>
+        <div class="title" style="margin-top:10px; border-bottom:1px solid rgba(255,255,255,0.05);">SYSTEM_HEARTBEAT</div>
+        <div class="item-row" style="margin-top:5px; border:1px solid var(--border);">
+            <div class="item-label"><span>GATE_STATUS</span> <span id="gateStatus">---</span></div>
+            <div class="item-sub" id="multiplierLabel">STRATEGIC_VETO_PROTOCOL</div>
+        </div>
+        <div class="item-row" style="margin-top:5px; border:1px solid var(--border);">
+            <div class="item-label"><span>AGENT_STATE</span> <span id="agentState">NOMINAL</span></div>
+            <div class="item-sub" id="fidelityLabel">FIDELITY: 85% | WEIGHT: 1.0</div>
+        </div>
+        <!-- F.6 AutoRecovery widget -->
+        <div class="item-row" style="margin-top:5px; border:1px solid var(--border);">
+            <div class="item-label"><span>AUTO_RECOVERY</span> <span id="recStatus">--</span></div>
+            <div class="item-sub" id="recSub">CONSECUTIVE_FAILURES: 0</div>
+        </div>
+        <!-- F.1 CI badge -->
+        <div class="item-row" style="margin-top:5px; border:1px solid var(--border);">
+            <div class="item-label"><span>CI_STATUS</span> <span id="ciStatus">--</span></div>
+            <div class="item-sub" id="ciSub">LAST_RUN: --</div>
+        </div>
+        <div class="title" style="margin-top:10px; border-bottom:1px solid rgba(255,255,255,0.05);">PANOPTICON_SENSORS</div>
+        <div id="sensorGrid"></div>
+    </div>
+
+    <div class="module center-panel">
+        <div class="title">PHYSICS_OF_CAPITAL (INVENTORY)</div>
+        <div class="inventory-grid" id="assetGrid"></div>
+        <!-- NAV equity curve -->
+        <div class="pnl-graph-box" style="position:relative;">
+            <canvas id="pnlCanvas" style="width:100%;height:100%;"></canvas>
+            <span style="position:absolute;top:3px;left:6px;font-size:0.6rem;color:var(--dim);">NAV_CURVE</span>
+            <span id="navMin" style="position:absolute;bottom:2px;left:6px;font-size:0.6rem;color:var(--dim);"></span>
+            <span id="navMax" style="position:absolute;top:16px;left:6px;font-size:0.6rem;color:var(--dim);"></span>
+        </div>
+        <!-- Gate trend sparkbars -->
+        <div style="padding:6px 0 2px;">
+            <div class="title" style="font-size:0.72rem;margin-bottom:4px;">GATE_TREND (LAST 5 CYCLES)</div>
+            <div id="gateTrendGrid"></div>
+        </div>
+        
+        <div class="bay-section">
+            <div class="title" style="color:var(--red); border-color:var(--red);">TACTICAL_EXECUTION (HEDGES)</div>
+            <div id="hedgeGrid"></div>
+        </div>
+        
+        <div class="bay-section">
+            <div class="title" style="color:var(--amber); border-color:var(--amber);">INSTITUTIONAL_YIELD (ARMOR)</div>
+            <div id="yieldGrid"></div>
+        </div>
+
+        <div class="performance-matrix">
+            <div class="pnl-box"><div style="font-size:0.85rem; color:var(--dim);">2H_PULSE</div><div class="pnl-val" id="pnl2h" style="font-size:1.1rem;">+0.00%</div></div>
+            <div class="pnl-box" style="border-color: var(--cyan);"><div style="font-size:0.85rem; color:var(--cyan);">NAV_TOTAL</div><div class="pnl-val" id="dragonNAV" style="font-size:1.1rem;">$0.00</div></div>
+        </div>
+    </div>
+
+    <div class="module right-panel">
+        <div class="title">SWARM_INTELLIGENCE (8-LAYER)</div>
+        <div class="swarm-grid" id="swarmGrid"></div>
+        <div class="title">SOVEREIGN_THOUGHTS (GEMMA)</div>
+        <div class="narrative-terminal" id="narrativeLog"></div>
+    </div>
+
+    <footer>
+        <div style="display:flex;gap:25px;">
+            <span>BTC:<span id="priceBTC" style="color:var(--cyan);">--</span></span>
+            <span>jupSOL:<span id="priceSOL" style="color:var(--cyan);">--</span></span>
+            <span>jupUSD:<span id="priceUSD" style="color:var(--cyan);">--</span></span>
+        </div>
+        <div style="display:flex;gap:20px;align-items:center;">
+            <span id="dataAge" style="font-size:0.72rem;color:var(--dim);"></span>
+            <span>LAST_PULSE: <span id="lastUpdate" style="color:var(--dim);">--</span></span>
+        </div>
+    </footer>
+
+    <script src="data/latest_signal_v10.js"></script>
+    <script>
+        function updateUI(id, val, color = null) {
+            const el = document.getElementById(id);
+            if (el) { el.textContent = val; if (color) el.style.color = color; }
+        }
+
+        function toggleMode() {
+            document.body.classList.toggle('lit');
+            document.getElementById('modeBtn').textContent =
+                document.body.classList.contains('lit') ? '[DIM]' : '[LIT]';
+        }
+
+        function drawGraph(history, pnl) {
+            const canvas = document.getElementById('pnlCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const lineStyle = pnl >= 0 ? '#00ff9d' : '#ff3c3c';
+            const glowStyle = pnl >= 0 ? 'rgba(0,255,157,0.15)' : 'rgba(255,60,60,0.15)';
+            if (!history || history.length < 2) {
+                ctx.strokeStyle = lineStyle; ctx.globalAlpha = 0.3;
+                ctx.beginPath(); ctx.moveTo(0, canvas.height/2); ctx.lineTo(canvas.width, canvas.height/2); ctx.stroke();
+                ctx.globalAlpha = 1.0; return;
+            }
+            const navs = history.map(h => h.nav);
+            const min = Math.min(...navs) * 0.995;
+            const max = Math.max(...navs) * 1.005;
+            const range = max - min || 1;
+            updateUI('navMin', '$' + min.toFixed(0));
+            updateUI('navMax', '$' + max.toFixed(0));
+            ctx.strokeStyle = lineStyle; ctx.lineWidth = 2;
+            ctx.shadowBlur = 10; ctx.shadowColor = lineStyle;
+            ctx.beginPath();
+            history.forEach((h, i) => {
+                const x = (i / (history.length - 1)) * canvas.width;
+                const y = canvas.height - ((h.nav - min) / range) * (canvas.height - 4) - 2;
+                i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+            });
+            ctx.stroke(); ctx.shadowBlur = 0;
+            const lastX = canvas.width;
+            const lastY = canvas.height - ((navs[navs.length-1] - min) / range) * (canvas.height - 4) - 2;
+            ctx.lineTo(lastX, canvas.height); ctx.lineTo(0, canvas.height);
+            ctx.fillStyle = glowStyle; ctx.fill();
+        }
+
+        function createItem(label, value, sub, color = null) {
+            const div = document.createElement('div');
+            div.className = 'item-row';
+            div.innerHTML = `<div class="item-label">${label} <span style="color:${color || 'var(--cyan)'}">${value}</span></div><div class="item-sub">${sub}</div>`;
+            return div;
+        }
+
+        function syncRecovery(rec) {
+            if (!rec) { updateUI('recStatus', 'N/A', 'var(--dim)'); return; }
+            const f = rec.consecutiveFailures || 0;
+            const lvl = rec.lastRecoveryLevel || 'none';
+            const rb = rec.rollbacksPerformed || 0;
+            const el = document.getElementById('recStatus');
+            if (f === 0) { el.textContent = 'NOMINAL'; el.className = 'rec-ok'; }
+            else if (f < 3) { el.textContent = `WATCH (${f})`; el.className = 'rec-warn'; }
+            else { el.textContent = `RECOVERY_LVL${Math.min(f < 5 ? 2 : 3, 3)}`; el.className = 'rec-bad'; }
+            document.getElementById('recSub').textContent =
+                `FAILURES:${f} | LAST:${lvl.toUpperCase()} | ROLLBACKS:${rb}`;
+        }
+
+        function syncCI(ci) {
+            if (!ci) { updateUI('ciStatus', 'NO_DATA', 'var(--dim)');
+                updateUI('ciSub', 'LAST_RUN: --'); return; }
+            const ok = ci.ok !== false;
+            const el = document.getElementById('ciStatus');
+            el.textContent = ok ? `PASS (${ci.passed}/${(ci.passed||0)+(ci.failed||0)})` : `FAIL (${ci.failed}f)`;
+            el.className = ok ? 'rec-ok' : 'rec-bad';
+            const ts = (ci.timestamp || '').slice(0, 16).replace('T', ' ');
+            document.getElementById('ciSub').textContent = `LAST_RUN: ${ts || '--'} | ELAPSED: ${ci.elapsed_s || '?'}s`;
+        }
+
+        function syncGateTrend(trend) {
+            const el = document.getElementById('gateTrendGrid'); el.innerHTML = '';
+            if (!trend || !trend.length) {
+                el.appendChild(createItem('TREND', 'ACCUMULATING', 'NOT_ENOUGH_CYCLES', 'var(--dim)')); return;
+            }
+            ['G1','G2','G3','G4'].forEach(g => {
+                const vals = trend.map(t => t[g] || 0);
+                const cur = vals[vals.length - 1];
+                const mx = 100;
+                const bars = vals.map(v => {
+                    const h = Math.max(2, Math.round((v / mx) * 20));
+                    const c = v >= 60 ? 'var(--green)' : v >= 40 ? 'var(--cyan)' : 'var(--amber)';
+                    return `<span style="height:${h}px;background:${c};"></span>`;
+                }).join('');
+                const delta = vals.length > 1 ? (cur - vals[0]).toFixed(0) : '0';
+                const row = document.createElement('div');
+                row.className = 'item-row';
+                row.innerHTML = `<div class="item-label" style="margin-bottom:2px;">${g} <span style="color:${cur>=60?'var(--green)':cur>=40?'var(--cyan)':'var(--amber)'}">${cur.toFixed(0)}</span> <span style="color:var(--dim);font-size:0.7rem;">(${delta>=0?'+':''}${delta})</span></div><div class="trend-bar">${bars}</div>`;
+                el.appendChild(row);
+            });
+        }
+
+        function syncRegimeTimeline(history) {
+            const el = document.getElementById('regimeTimeline'); el.innerHTML = '';
+            if (!history || !history.length) {
+                const d = document.createElement('div');
+                d.className='rl-row'; d.textContent='NO_HISTORY_YET'; el.appendChild(d); return;
+            }
+            const regimeColor = r => {
+                const u = String(r).toUpperCase();
+                // 6-regime spectrum: BIG_BULL > BULL > BULL_NEUTRAL > BEAR_NEUTRAL > BEAR > BIG_BEAR
+                if (u.includes('BIG_BULL') || u.includes('1.8')) return 'var(--green)';
+                if ((u.includes('BULL') && !u.includes('NEUTRAL') && !u.includes('BIG')) || u.includes('1.0')) return 'var(--green)';
+                if (u.includes('BULL_NEUTRAL') || u.includes('1.5')) return 'var(--soft-green)';
+                if (u.includes('BEAR_NEUTRAL') || u.includes('2.0')) return 'var(--cyan)';
+                if ((u.includes('BEAR') && !u.includes('NEUTRAL') && !u.includes('BIG')) || u.includes('2.5')) return 'var(--amber)';
+                if (u.includes('BIG_BEAR') || u.includes('3.0')) return 'var(--red)';
+                return 'var(--dim)';
+            };
+            [...history].reverse().forEach((e, i) => {
+                const d = document.createElement('div');
+                d.className = 'rl-row' + (i === 0 ? ' rl-cur' : '');
+                
+                // Force Montreal / Eastern Time
+                let ts = '';
+                if (e.timestamp) {
+                    const dObj = new Date(e.timestamp);
+                    ts = dObj.toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour12: false, hour: '2-digit', minute: '2-digit' });
+                }
+                
+                const lbl = String(e.regime).replace('REGIME ','').replace('REGIME_','');
+                const cgs = e.cgs ? ` | CGS:${parseFloat(e.cgs).toFixed(1)}` : '';
+                d.innerHTML = `<span style="min-width:35px;color:var(--dim);">${ts}</span> <span style="color:${regimeColor(String(e.regime))}">${lbl}</span><span style="color:var(--dim);">${cgs}</span>`;
+                el.appendChild(d);
+            });
+        }
+
+        function checkStale(ts) {
+            const age = (Date.now() - new Date(ts).getTime()) / 3600000;
+            const banner = document.getElementById('staleBanner');
+            const ageEl = document.getElementById('dataAge');
+            const mins = Math.round(age * 60);
+            ageEl.textContent = `DATA_AGE: ${mins}m`;
+            if (age > 2.5) {
+                banner.style.display = 'inline';
+                ageEl.style.color = 'var(--amber)';
+            } else {
+                banner.style.display = 'none';
+                ageEl.style.color = 'var(--dim)';
+            }
+        }
+
+        function sync() {
+            const data = window.DRAGON_DATA; if (!data) return;
+            
+            const addr = data.master_key_vault?.vault_address || 'D8yPCLMsk93micytnY8X78X9P8p9q8r8s8t8u8v8w8x';
+            updateUI('walletAddr', addr.substring(0, 18) + '...');
+            updateUI('dragonCGS', data.dragon_vitals.gate_cgs.toFixed(1));
+
+            const gGrid = document.getElementById('gateGrid');
+            // gateGrid removed — gate scores shown in GATE_TREND (center panel)
+
+            // v3.1: Map panopticon regime to display regime (6-regime spectrum)
+            let rawRegime = (data.dragon_vitals.regime || 'REGIME_2').replace('REGIME_', '').replace('REGIME ', '');
+            const regimeToDisplay = (r) => {
+                const u = r.toUpperCase().replace('REGIME_', '').replace('REGIME ', '').trim();
+                if (u === '1_8' || u === '1.8') return { config: 'BIG_BULL', color: 'var(--green)', cssClass: 'mode-big-bull' };
+                if (u === '1' || u === '1.0') return { config: 'BULL', color: 'var(--green)', cssClass: 'mode-bull' };
+                if (u === '1_5' || u === '1.5') return { config: 'BULL_NEUTRAL', color: 'var(--soft-green)', cssClass: 'mode-bull-neutral' };
+                if (u === '2' || u === '2.0') return { config: 'BEAR_NEUTRAL', color: 'var(--cyan)', cssClass: 'mode-bear-neutral' };
+                if (u === '2_5' || u === '2.5') return { config: 'BEAR', color: 'var(--amber)', cssClass: 'mode-bear' };
+                if (u === '3' || u === '3.0') return { config: 'BIG_BEAR', color: 'var(--red)', cssClass: 'mode-big-bear' };
+                // Direct config regime passthrough
+                if (u === 'BIG_BULL') return { config: 'BIG_BULL', color: 'var(--green)', cssClass: 'mode-big-bull' };
+                if (u === 'BULL') return { config: 'BULL', color: 'var(--green)', cssClass: 'mode-bull' };
+                if (u === 'BULL_NEUTRAL') return { config: 'BULL_NEUTRAL', color: 'var(--soft-green)', cssClass: 'mode-bull-neutral' };
+                if (u === 'BEAR_NEUTRAL') return { config: 'BEAR_NEUTRAL', color: 'var(--cyan)', cssClass: 'mode-bear-neutral' };
+                if (u === 'BEAR') return { config: 'BEAR', color: 'var(--amber)', cssClass: 'mode-bear' };
+                if (u === 'BIG_BEAR') return { config: 'BIG_BEAR', color: 'var(--red)', cssClass: 'mode-big-bear' };
+                return { config: 'BEAR_NEUTRAL', color: 'var(--cyan)', cssClass: 'mode-bear-neutral' };
+            };
+            const mapped = regimeToDisplay(rawRegime);
+            const configRegime = mapped.config;
+
+            // Atmospheric cues: color the CGS value by config regime
+            const cgsEl = document.getElementById('dragonCGS');
+            if (cgsEl) cgsEl.style.color = mapped.color;
+
+            // Highlight active regime in REGIME_MAP
+            document.querySelectorAll('.map-row').forEach(r => r.classList.remove('active-map'));
+            const mapIdMap = {
+                'BIG_BULL': 'mapBigBull',
+                'BULL': 'mapBull',
+                'BULL_NEUTRAL': 'mapBullNeutral',
+                'BEAR_NEUTRAL': 'mapBearNeutral',
+                'BEAR': 'mapBear',
+                'BIG_BEAR': 'mapBigBear'
+            };
+            const mapId = mapIdMap[configRegime] || '';
+            if (mapId && document.getElementById(mapId)) document.getElementById(mapId).classList.add('active-map');
+
+            const iGrid = document.getElementById('assetGrid'); iGrid.innerHTML = '';
+            const nav = data.portfolio.net_asset_value;
+            // Yield floor assets (armor) — shown in amber/gold
+            const yieldFloorAssets = ['JLP', 'STRCx', 'JUICED', 'jupUSD', 'USDC', 'SOL'];
+            data.inventory.positions.forEach(pos => {
+                // weight IS the real USD value from portfolio snapshot
+                const usdVal = parseFloat(pos.weight).toFixed(2);
+                const pct = nav > 0 ? ((parseFloat(pos.weight) / nav) * 100).toFixed(1) + '%' : '0.0%';
+                let color = 'var(--dim)';
+                if (pos.is_physical) {
+                    color = yieldFloorAssets.includes(pos.symbol) ? 'var(--amber)' : 'var(--green)';
+                }
+                const displayValue = `${pct} | $${usdVal} USD`;
+                iGrid.appendChild(createItem(pos.symbol, displayValue, pos.label || 'STRATEGIC_INTENT', color));
+            });
+
+            const hGrid = document.getElementById('hedgeGrid'); hGrid.innerHTML = '';
+            const hedges = data.tactical_weapons.positions.filter(p => p.side === 'HEDGE' || p.side === 'SHORT' || (p.side === 'LONG' && p.symbol !== 'SOL'));
+            if (hedges.length > 0) {
+                hedges.forEach(h => {
+                    const sl = h.sl ? `$${h.sl.toLocaleString()}` : '--';
+                    const tp1 = h.tp1 ? `$${h.tp1.toLocaleString()}` : '--';
+                    const tp2 = h.tp2 ? `$${h.tp2.toLocaleString()}` : '--';
+                    const targets = `SL: ${sl} | TP1: ${tp1} | TP2: ${tp2}`;
+                    hGrid.appendChild(createItem(h.symbol, h.weight + '%', targets, h.is_live ? 'var(--red)' : 'var(--dim)'));
+                });
+            } else {
+                hGrid.appendChild(createItem('STATUS', 'NEUTRAL', 'NO ACTIVE HEDGES', 'var(--dim)'));
+            }
+
+            const yGrid = document.getElementById('yieldGrid'); yGrid.innerHTML = '';
+            if (data.fortress_armor?.actual_allocations) {
+                Object.entries(data.fortress_armor.actual_allocations).forEach(([v, p]) => yGrid.appendChild(createItem(v, parseFloat(p).toFixed(1) + '%', 'SECURED_FLOOR_YIELD', 'var(--amber)')));
+            }
+
+            updateUI('dragonNAV', '$' + nav.toLocaleString());
+            const pnl = data.portfolio.pct_pnl;
+            updateUI('pnl2h', (pnl >= 0 ? '+' : '') + pnl.toFixed(2) + '%', pnl >= 0 ? 'var(--green)' : 'var(--red)');
+
+            const sGrid = document.getElementById('swarmGrid'); sGrid.innerHTML = '';
+            Object.entries(data.swarm_matrix).forEach(([l, info]) => sGrid.appendChild(createItem(l.toUpperCase(), info.score.toFixed(1), info.reasoning)));
+
+            // Sync Health & Sensors with DUAL-LINE
+            // healthGrid removed — GATE_STATUS, AGENT_STATE, AUTO_RECOVERY, CI_STATUS are explicit rows
+
+            const gStat = document.getElementById('gateStatus');
+
+            gStat.textContent = data.health_telemetry.gate_status;
+            gStat.classList.remove('pulse-active', 'pulse-caution');
+            if (data.health_telemetry.gate_status === 'OPEN') {
+                gStat.style.color = 'var(--green)';
+                gStat.classList.add('pulse-active');
+            } else {
+                gStat.style.color = 'var(--amber)';
+                gStat.classList.add('pulse-caution');
+            }
+            
+            document.getElementById('multiplierLabel').textContent = `${data.health_telemetry.multiplier.toFixed(2)}X_TACTICAL_SCALING`;
+            
+            // Neural Squeeze Sync
+            const aStat = document.getElementById('agentState');
+            const fidLabel = document.getElementById('fidelityLabel');
+            const fid = data.health_telemetry.fidelity || 0.85;
+            const w_agent = Math.max(0, (fid - 0.25) / 0.75);
+            
+            aStat.textContent = data.health_telemetry.agent_state;
+            aStat.classList.remove('pulse-active', 'pulse-caution');
+            
+            if (data.health_telemetry.agent_state === 'NOMINAL') {
+                aStat.style.color = 'var(--green)';
+            } else if (data.health_telemetry.agent_state === 'PURGED') {
+                aStat.style.color = 'var(--red)';
+            } else if (data.health_telemetry.agent_state === 'AWAITING_IGNITION') {
+                aStat.style.color = 'var(--cyan)';
+                aStat.classList.add('pulse-active');
+            } else {
+                aStat.style.color = 'var(--amber)';
+            }
+            
+            fidLabel.textContent = `FIDELITY: ${(fid * 100).toFixed(0)}% | WEIGHT: ${w_agent.toFixed(2)}`;
+            
+            // Absolute Ignition Stamp (Montreal Time)
+            const now = new Date();
+            const ignTime = now.toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById('lastIgnition').textContent = `LAST_STRATEGIC_IGNITION: ${ignTime} EDT`;
+
+            const snsGrid = document.getElementById('sensorGrid'); snsGrid.innerHTML = '';
+            snsGrid.appendChild(createItem('RVOL', (data.dragon_vitals.rvol || 1.0).toFixed(2), 'SOL/BTC_REL_VOLUME_SURGE', 'var(--cyan)'));
+            snsGrid.appendChild(createItem('HVI', (data.dragon_vitals.hvi || 50.0).toFixed(1), 'HL_SYSTEMIC_VOL_INDEX', 'var(--cyan)'));
+
+            document.getElementById('narrativeLog').textContent = data.narrative;
+            drawGraph(data.portfolio.history, pnl);
+            updateUI('priceBTC', '$' + data.market_prices.BTC.toLocaleString());
+            updateUI('priceSOL', '$' + (data.market_prices.SOL || 0).toFixed(2));
+            updateUI('priceUSD', '$' + (data.market_prices.jupUSD || 1.00).toFixed(2));
+            updateUI('lastUpdate', new Date(data.timestamp).toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' EDT');
+            syncRecovery(data.recovery_state || null);
+            syncCI(data.ci_status || null);
+            syncGateTrend(data.gate_trend || []);
+            syncRegimeTimeline(data.regime_history || []);
+            checkStale(data.timestamp);
+        }
+
+        setInterval(sync, 5000); sync();
+    </script>
+</body>
+</html>
